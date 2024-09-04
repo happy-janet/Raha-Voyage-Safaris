@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake Mburo Safari Details</title>
+    <style>
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            text-transform: capitalize;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+       
+
+        header {
+    position: relative;
+    background-color: #ffa500;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 10px; /* Adds space below the back button */
+    padding: 10px 15px;
+    background-color: #ffa500;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute; /* Position it within the header */
+    top: 20px; /* Adjust vertical position */
+    left: 20px; /* Adjust horizontal position */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-button:hover {
+    background-color: #ffa500;
+    transform: scale(1.05);
+}
+
+
+        .carousel {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .carousel button.prev {
+            left: 10px;
+        }
+
+        .carousel button.next {
+            right: 10px;
+        }
+
+        .container {
+    display: flex; /* Add this to make child elements align in a row */
+    gap: 20px; /* Add spacing between the two sections */
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    flex-wrap: wrap; /* This allows wrapping on smaller screens */
+}
+
+.about-container,
+.form-container {
+    flex: 1; /* Allows them to take equal width or adjust according to content */
+    min-width: 350px; /* Sets a minimum width for the containers */
+    margin: 0; /* Remove the bottom margin to align properly */
+}
+
+        .about-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-container h2 {
+            margin-top: 0;
+            color: #ffa500;
+        }
+
+        .about-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .about-card {
+            flex: 1 1 calc(50% - 20px);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .about-card p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            color: #080808;
+        }
+
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px #ffa500(0, 0, 0, 0.1);
+        }
+
+        .booking-form h2 {
+            margin-top: 0;
+            color: #ffa500;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .booking-form .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .booking-form textarea {
+            grid-column: span 2;
+        }
+
+        .booking-form button {
+            background-color: #ffa500;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            width: 100%;
+        }
+
+        .booking-form button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .booking-form button:focus {
+            outline: none;
+        }
+
+        footer {
+            background-color: #ffa500;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="carousel">
+            <img src="falls.png" alt="Lake Mburo Safari Image 1" class="active">
+            <img src="falls1.png" alt="Lake Mburo Safari Image 2" style="display: none;">
+            <img src="falls2.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+            <img src="falls3.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+            <img src="falls4.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+            <img src="falls5.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+            <img src="falls6.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+            <img src="falls7.png" alt="Lake Mburo Safari Image 3" style="display: none;">
+
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+
+        <h1>Murchison Falls Safari Experience</h1>
+    </header>
+
+    <div class="container">
+        <section class="about-container">
+            <h2>About Murchison Falls Safari</h2>
+            <p>Experience the power and beauty of Uganda's largest national park with the Murchison Falls Safari. This
+                unforgettable journey takes you to the mighty Murchison Falls, where the Nile River forces its way
+                through a narrow gorge, creating a breathtaking spectacle. Explore vast savannahs, lush forests, and
+                the iconic river on game drives and boat cruises that offer sightings of elephants, lions, giraffes,
+                hippos, crocodiles, and countless bird species. Whether you're a wildlife enthusiast or a nature lover,
+                Murchison Falls Safari promises an exhilarating adventure through one of Africa's most spectacular
+                landscapes.</p>
+                <h1>Activites</h1>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h3>Top of the Falls Hike:</h3>
+                    <p> Trek to the top of Murchison Falls for stunning views of the powerful
+                        waterfalls.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Game Drives: </h3>
+                    <p> Spot the "Big Five" and other wildlife in the park's open savannah and riverine
+                        areas.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Boat Cruise to the Falls:</h3>
+                    <p>Enjoy a scenic cruise on the Nile with close encounters with hippos and
+                        crocodiles.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Bird Watching</h3>
+                    <p>Discover over 600 bird species, including the rare Shoebill Stork.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Chimpanzee Tracking in Budongo Forest: </h3>
+                    <p>Add a primate adventure to your safari with a trek to see
+                        chimpanzees in their natural habitat.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <div class="booking-form">
+                <h2>Book Your Safari</h2>
+                <form id="safariBookingForm" action="/book-safari" method="post">
+                    <div class="inputBox">
+                        <h3>Full Name</h3>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Email Address</h3>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Nationality</h3>
+                        <select id="nationality" name="nationality" required>
+                            <option value="resident">Resident</option>
+                            <option value="non-resident">Non-Resident</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Phone Number</h3>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Accommodation Type</h3>
+                        <select id="accommodation-type" name="accommodationType" required>
+                            <option value="luxury">Luxury</option>
+                            <option value="midrange">Midrange</option>
+                            <option value="budget">Budget</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Safari Package</h3>
+                        <input type="text" id="safari-package" name="safariPackage" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Number of Adults</h3>
+                        <input type="number" id="adults" name="adults" min="1" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Number of Children</h3>
+                        <input type="number" id="children" name="children" min="0">
+                    </div>
+                    <div class="inputBox">
+                        <h3>Safari Type</h3>
+                        <select id="safari-type" name="safariType" required>
+                            <option value="game-drive">Guided Game Drive</option>
+                            <option value="boat-safari">Boat Safari</option>
+                            <option value="nature-walk">Nature Walk</option>
+                            <option value="horseback-safari">Horseback Safari</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Start Date</h3>
+                        <input type="date" id="start-date" name="startDate" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>End Date</h3>
+                        <input type="date" id="end-date" name="endDate" required>
+                    </div>
+                    <div class="inputBox">
+                        <h3>Special Requests</h3>
+                        <textarea id="special-requests" name="specialRequests" rows="4"></textarea>
+                    </div>
+                    <input type="submit" class="btn" value="Submit Booking">
+                </form>
+                
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Lake Mburo Safaris. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel img');
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            slides.forEach((slide, i) => {
+                slide.style.display = i === currentSlide ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide += 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide -= 1);
+        }
+
+        showSlide(currentSlide);
+        setInterval(nextSlide, 5000); // Automatic slide transition every 5 seconds
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Raha Voyage Safaris </title>
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+</head>
+<body>
+    <!-- header section start -->
+    <header>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <a href="#" class="logo">
+          <img src="raha-logo.png" alt="Raha Voyage Safaris Logo" class="logo-image"> 
+          <span>Raha Voyage</span>Safaris
+        </a>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#book">Booking</a>
+            <a href="#packages">Packages</a>
+            <a href="#services">Services </a>
+            <a href="#gallery">Gallery</a>
+            <a href="#review">Review</a>
+            <a href="#contact">Contact</a>
+        </nav>      
+    
+    <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <i class="fas fa-user" id="login-btn"></i>
+    </div>
+</header>
+
+    <form action="" class="search-bar-container">
+        <input type="search" id="search-bar" placeholder="search here...">
+        <label for="search-bar" class="fas fa-search"></label>
+    </form>
+    <!-- header section end -->
+    
+    <!-- login form start -->
+    <div class="login-form-container">
+        <i class="fas fa-time" id="form-close"></i>
+        <form id="lofin-form" class="active"  action="">
+            <h3>login</h3>
+            <input type="email" class="box" placeholder="enter your email">
+            <input type="password" class="box" placeholder="enetr your password">
+            <input type="submit" value="login now" class="btn">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+            <p>Forget password? <a href="#" id="forgot-password-link">Click here</a></p>
+            <p>Don't have an account?<a href="#" id="signup-link">Register now</a></p>
+        </form>
+        <form id="signup-form">
+            <h3>Sign Up</h3>
+            <input type="text" class="box" placeholder="enter your name" required>
+            <input type="email" class="box" placeholder="enter your email" required>
+            <input type="password" class="box" placeholder="enter your password" required>
+            <input type="password" class="box" placeholder="confirm your password" required>
+            <input type="submit" value="sign up now" class="btn">
+            <p>Already have an account? <a href="#" id="login-link">Login here</a></p>
+        </form>
+        <form id="forgot-password-form">
+            <h3>Forgot Password</h3>
+            <input type="email" class="box" placeholder="enter your email" required>
+            <input type="submit" value="reset password" class="btn">
+            <p>Remember your password? <a href="#" id="back-to-login-link">Login here</a></p>
+        </form>
+    </div>
+    <!-- login form end -->
+
+    <!-- home section starts -->
+     <section class="home" id="home">
+        <div class="content">
+            <h3>Raha Voyage Safaris</h3>
+            <p>discover new places with us, adventure awaits</p>
+            <a href="#" class="btn">discover more</a>
+        </div>
+        <div class="controls">
+            <span class="vid-btn active" data-src="video1.mp4"></span>
+            <span class="vid-btn" data-src="video2.mp4"></span>
+            <span class="vid-btn" data-src="video3.mp4"></span>
+            <span class="vid-btn" data-src="video4.mp4"></span>
+            <span class="vid-btn" data-src="video5.mp4"></span>
+        </div>
+        <div class="video-container">
+            <video src="video1.mp4" id="video-slider" loop autoplay muted></video>
+        </div>
+     </section>
+       <!-- home section end -->
+    <section id="about-us">
+        <div class="container">
+          <h2>About Us</h2>
+          <p>At <strong>Raha Voyage Safaris</strong>, we are your premier partners in creating unforgettable adventures across the heart of Uganda. Our passion lies in revealing the breathtaking landscapes, diverse wildlife, and vibrant cultural heritage that this beautiful country has to offer.</p>
+          
+          <p>With a team of experienced guides and safari experts, we are committed to providing personalized, authentic experiences that go beyond your expectations. Whether you're seeking thrilling wildlife encounters in Uganda's national parks like Bwindi Impenetrable Forest or Murchison Falls, or you want to immerse yourself in the rich local culture, we tailor safaris to match your unique interests and preferences.</p>
+          
+          <h3>Our Commitment</h3>
+          <p>Our dedication to responsible tourism and sustainability influences everything we do. We prioritize conserving Uganda’s natural resources and supporting local communities through our initiatives. When you choose Raha Voyage Safaris, you’re not only embarking on an extraordinary journey but also contributing to the well-being of the country and its people.</p>
+          
+          <h3>Our Values</h3>
+          <ul>
+            <li><strong>Authenticity:</strong> We provide genuine, immersive experiences that capture the true essence of Uganda.</li>
+            <li><strong>Sustainability:</strong> Our responsible tourism practices protect the environment and uplift local communities.</li>
+            <li><strong>Excellence:</strong> We deliver outstanding service, ensuring attention to detail in every aspect of your safari.</li>
+            <li><strong>Passion:</strong> Driven by our deep love for Uganda and its wildlife, we share this passion with our clients.</li>
+            <li><strong>Innovation:</strong> We constantly seek new and exciting ways to enhance your safari experience.</li>
+          </ul>
+        </div>
+    </section>
+      
+
+       <!-- book section start -->
+
+    <section class="book" id="book">
+        <h1 class="heading">
+            <span>b</span>
+            <span>o</span>
+            <span>o</span>
+            <span>k</span>
+            <span class="space"></span>
+            <span>n </span>
+            <span>o</span>
+            <span>w</span>
+        </h1>
+        <div class="row">
+            <div class="image">
+                <img src="van.png" alt="">
+            </div>
+            <form id="genericBookingForm" action="/book" method="post">
+                <div class="inputBox">
+                    <h3>Where to</h3>
+                    <input type="text" id="placeName" name="placeName" placeholder="Place Name" required>
+                </div>
+                <div class="inputBox">
+                    <h3>How many</h3>
+                    <input type="number" id="numberOfGuests" name="numberOfGuests" placeholder="Number of Guests" required>
+                </div>
+                <div class="inputBox">
+                    <h3>Arrival Date</h3>
+                    <input type="date" id="arrivalDate" name="arrivalDate" required>
+                </div>
+                <div class="inputBox">
+                    <h3>Leaving Date</h3>
+                    <input type="date" id="leavingDate" name="leavingDate" required>
+                </div>
+                <input type="submit" class="btn" value="Book Now">
+            </form>
+            
+        </div>
+       </section>
+  <!-- book section end -->
+
+  <!-- package section start -->
+
+  <section class="packages" id="packages">
+    <h1 class="heading">
+        <span>p</span>
+        <span>a</span>
+        <span>c</span>
+        <span>k</span>
+        <span>a </span>
+        <span>g</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+        <div class="box-container">
+
+            <div class="box">
+                <img src="jinja2.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Lake Mburo National Park Safari (2 Days Tour)</h3>
+                    <p>
+                        Lake Mburo National Park, a wildlife gem in western Uganda, offers stunning landscapes, diverse animals like zebras and buffalos, and over 300 bird species.it's a perfect nature escape. </p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price"> $800 pp (USD)</div> -->
+                    <a href="lake-mburo.html" class="btn">book now</a>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <img src="queen.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Queen Elizabeth National Park Safaris (3 Days Safari)</h3>
+                    <p>Queen Elizabeth National Park is a thrilling wildlife haven, 
+                        home to tree-climbing lions, vibrant birdlife, and stunning landscapes. 
+                        Enjoy game drives, boat cruises on the Kazinga Channel. </p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price">Ugx 300000<span>Ugx 50000</span></div> -->
+                    <a href="queen-elizabeth.html" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="gorilla1.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Uganda Gorilla and Wildlife Safari</h3>
+                    <p>The Uganda Gorilla and Wildlife Safari is a thrilling 
+                        adventure that takes you deep into Bwindi Forest to encounter 
+                        mountain gorillas up close, alongside exciting game drives, boat 
+                        cruises, and more.</p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price">Ugx 300000<span>Ugx 500000</span></div> -->
+                    <a href="gorilla.html" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="falls.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Murchison Falls Safari</h3>
+                    <p>Murchison Falls is a stunning natural wonder where the Nile River 
+                        forces through a narrow gorge, creating a powerful waterfall amidst 
+                        breathtaking landscapes and diverse wildlife.</p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price">Ugx 300000<span> Ugx 500000</span></div> -->
+                    <a href="murchison-falls.html" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="rwenzori.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Rwenzori Mountains Trekking</h3>
+                    <p>"Embark on a trek through the Rwenzori Mountains' lush forests and icy peaks, discovering breathtaking landscapes and diverse wildlife in Uganda's highlands."</p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price">Ugx 300000<span>Ugx 500000</span></div> -->
+                    <a href="mount-rwenzori.html" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="kidepo.png" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i>Kidepo Valley National Park Safaris</h3>
+                    <p>Kidepo Valley National Park is a breathtaking wilderness with 
+                        dramatic landscapes, rare wildlife like cheetahs and lions, 
+                        and rich cultural encounters with the Karamojong and Ik tribes, 
+                        offering an authentic and unforgettable safari experience! </p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                    <!-- <div class="price">Ugx 300000<span>Ugx 500000</span></div> -->
+                    <a href="kidepo.html" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+        </section>
+         <!-- package section end -->
+
+         <!-- services section starts -->
+         <section class="services" id="services">
+            <h1 class="heading">
+                <span>s</span>
+                <span>e</span>
+                <span>r</span>
+                <span>i</span>
+                <span>v </span>
+                <span>c</span>
+                <span>e</span>
+                <span>s</span>
+            </h1>
+
+            <div class="box-container">
+                <div class="box">
+                    <i class="fas fa-hotel"></i>
+                    <h3>affordable hotels</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                </div>
+
+
+                    <div class="box">
+                        <i class="fas fa-utensils"></i>
+                        <h3>food and drinks</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                    </div>
+
+                   
+                        <div class="box">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>safety guide</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                        </div>
+
+                        
+                            <div class="box">
+                                <i class="fas fa-globe-asia"></i>
+                                <h3>around the world</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                            </div>
+
+                            
+                                <div class="box">
+                                    <i class="fas fa-plane"></i>
+                                    <h3>fastest travel</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                                </div>
+
+                               
+                                    <div class="box">
+                                        <i class="fas fa-hiking"></i>
+                                        <h3>adventure</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                                    </div>
+
+            </div>
+            </section>
+        
+         <!-- services section end -->
+
+
+<!-- gallery section start -->
+
+<section class="gallery" id="gallery">
+    <h1 class="heading">
+        <span>g</span>
+        <span>a</span>
+        <span>l</span>
+        <span>l</span>
+        <span>e </span>
+        <span>r</span>
+        <span>y</span>
+    </h1>
+
+     <div class="box-container">
+        <div class="box">
+            <img src="van.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Majestic landscapes where nature's beauty flourishes.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Cascading waters roar with untamed power.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic1.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Lush forests whispering ancient secrets.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic2.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Sparkling waters reflecting the sky’s grace.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic3.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Whispering leaves tell tales of the wild.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic4.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Tranquil paths lead through untouched wilderness.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic5.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Crystal-clear rivers winding through verdant valleys. </p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic6.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>Untamed beauty in every corner of the wild.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="picnic7.png" alt="">
+            <div class="content">
+                <h3>amazing places</h3>
+                <p>The Nile’s currents carry history’s whisper.</p>
+                <!-- <a href="#" class="btn">see more</a> -->
+            </div>
+        </div>
+
+     </div>
+     </section>
+<!-- gallery section end -->
+
+
+
+<!-- review section start -->
+
+<section class="review" id="review">
+    <h1 class="heading">
+        <span>r</span>
+        <span>e</span>
+        <span>v</span>
+        <span>i </span>
+        <span>e</span>
+        <span>w</span>
+    </h1>
+    <div class="review-slider">
+        <div class="wrapper">
+            <div class="slider">
+                <div class="box">
+                    <img src="Edward.jpg" alt="">
+                    <h3>Edward</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis officia exercitationem a maxime, voluptates tempore sed fugit nemo atque omnis id ullam excepturi itaque rerum praesentium assumenda aliquam quisquam optio.</p>
+                <div class="stars">
+                    <i class="fas fa-stars"></i>
+                    <i class="fas fa-stars"></i>
+                    <i class="fas fa-stars"></i>
+                    <i class="fas fa-stars"></i>
+                    <i class="far fa-stars"></i>
+                </div>
+                 </div>
+                </div>
+
+                <div class="slider">
+                    <div class="box">
+                        <img src="tourist2.png" alt="">
+                        <h3>Happy Janet</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis officia exercitationem a maxime, voluptates tempore sed fugit nemo atque omnis id ullam excepturi itaque rerum praesentium assumenda aliquam quisquam optio.</p>
+                    <div class="stars">
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="fas fa-stars"></i>
+                        <i class="far fa-stars"></i>
+                    </div>
+                     </div>
+                    </div>
+
+                    <div class="slider">
+                        <div class="box">
+                            <img src="tourist.png" alt="">
+                            <h3>Burani Patience</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis officia exercitationem a maxime, voluptates tempore sed fugit nemo atque omnis id ullam excepturi itaque rerum praesentium assumenda aliquam quisquam optio.</p>
+                        <div class="stars">
+                            <i class="fas fa-stars"></i>
+                            <i class="fas fa-stars"></i>
+                            <i class="fas fa-stars"></i>
+                            <i class="fas fa-stars"></i>
+                            <i class="far fa-stars"></i>
+                        </div>
+                         </div>
+                        </div>
+
+                        <div class="slider">
+                            <div class="box">
+                                <img src="tourist1.png" alt="">
+                                <h3>Mable Musimenta</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis officia exercitationem a maxime, voluptates tempore sed fugit nemo atque omnis id ullam excepturi itaque rerum praesentium assumenda aliquam quisquam optio.</p>
+                            <div class="stars">
+                                <i class="fas fa-stars"></i>
+                                <i class="fas fa-stars"></i>
+                                <i class="fas fa-stars"></i>
+                                <i class="fas fa-stars"></i>
+                                <i class="far fa-stars"></i>
+                            </div>
+                             </div>
+                            </div>
+
+        </div>
+    </div>
+</section>
+<!-- review section end -->
+
+
+<!-- contact section start -->
+
+<section class="contact" id="contact">
+    <h1 class="heading">
+        <span>c</span>
+        <span>o</span>
+        <span>n</span>
+        <span>t </span>
+        <span>a</span>
+        <span>c</span>
+        <span>t</span>
+    </h1>
+
+<div class="row">
+    <div class="image">
+        <img src="contact1.png" alt="">
+    </div>
+    <form action="">
+        <div class="inputBox">
+            <input type="text" placeholder="name">
+            <input type="text" placeholder="email">
+        </div>
+        <div class="inputBox">
+            <input type="number" placeholder="number">
+            <input type="text" placeholder="subject">
+        </div>
+        <textarea placeholder="message" name="" id="" cols="30" rows="10"></textarea>
+        <input type="submit" class="btn" value="send message">
+    </form>
+</div>
+
+</section>
+<!-- contact section end -->
+
+<section class="reviews-newsletter">
+    <div class="container">
+        <div class="reviews-section">
+            <h2>Client Reviews & Ratings</h2>
+            <div class="review-form">
+                <form id="review-form" action="javascript:void(0);">
+                    <label for="client-name">Your Name</label>
+                    <input type="text" id="client-name" name="client-name" required>
+
+                    <label for="client-review">Your Review</label>
+                    <textarea id="client-review" name="client-review" rows="4" required></textarea>
+
+                    <label for="client-rating">Your Rating</label>
+                    <select id="client-rating" name="client-rating" required>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="3">★★★</option>
+                        <option value="2">★★</option>
+                        <option value="1">★</option>
+                    </select>
+
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+
+            <div class="submitted-reviews" id="submitted-reviews">
+                <!-- Reviews will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div class="newsletter-section">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates and offers right in your inbox.</p>
+            <form action="#" method="post">
+                <label for="newsletter-email">Email Address</label>
+                <input type="email" id="newsletter-email" name="newsletter-email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- footer section start -->
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>about us</h3>
+            <p>At <strong>Raha Voyage Safaris</strong>, we are your premier partners in creating unforgettable adventures across the heart of Uganda. Our passion lies in revealing the breathtaking landscapes, diverse wildlife, and vibrant cultural heritage that this beautiful country has to offer.</p>
+          
+         </div>
+
+         <div class="box">
+            <h3>branch location</h3>
+            <a href="#">Mbale Town</a>
+            <a href="#">Uganda</a>
+         </div>
+
+         <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">book</a>
+            <a href="#">packages</a>
+            <a href="#">services</a>
+            <a href="#">gallery</a>
+            <a href="#">review</a>
+            <a href="#">contact</a>
+         </div>
+
+         <div class="box">
+            <h3>Follow Us</h3>
+            <a href="https://www.facebook.com/rahavoyage.php?id=61563375524689&mibextid=kFxxJD" target="_blank">
+              <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/rahavoyage" target="_blank">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.twitter.com/rahavoyage" target="_blank">
+              <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <h3>Contacts : (+256) 76104774|759960242</h3>
+         </div>
+
+    </div>
+    <h1 class="credit">created by <span>@Janet Aballo |</span> all rights reserved!</h1>
+</section>
+<!-- footer section end -->
+    <script src="script.js"></script>
+</body>
+</html>
