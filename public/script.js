@@ -193,3 +193,55 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+const blogCard = document.getElementById('blogCard');
+const blogContents = document.querySelectorAll('.blog-content');
+let currentIndex = 0;
+
+function showNextBlog() {
+  // Hide current blog content
+  blogContents[currentIndex].classList.remove('active');
+  
+  // Move to the next blog content
+  currentIndex = (currentIndex + 1) % blogContents.length;
+  
+  // Show the next blog content
+  blogContents[currentIndex].classList.add('active');
+}
+
+// Transition to the next blog every 5 seconds
+setInterval(showNextBlog, 5000);
+
+function openPayment(paymentMethod) {
+    const modal = document.getElementById('payment-modal');
+    const iframe = document.getElementById('payment-frame');
+  
+    // Set the payment URL based on the selected method
+    switch (paymentMethod) {
+      case 'pesapal':
+        iframe.src = 'https://pesapal.com';
+        break;
+      case 'visa':
+        iframe.src = 'https://www.visa.com';
+        break;
+      case 'mastercard':
+        iframe.src = 'https://www.mastercard.com';
+        break;
+      case 'mtn':
+        iframe.src = 'https://mobilemoney.mtn.co.ug';
+        break;
+      case 'airtel':
+        iframe.src = 'https://airtel.co.ug/airtelmoney';
+        break;
+      default:
+        iframe.src = '';
+    }
+  
+    modal.style.display = 'block'; // Show the modal
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('payment-modal');
+    modal.style.display = 'none'; // Hide the modal
+  }
+  
