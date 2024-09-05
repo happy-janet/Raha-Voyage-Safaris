@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify(data)
             })
+
+            
                 .then(response => response.text())
                 .then(result => {
                     alert('Safari Booking Submitted Successfully');
@@ -29,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Generic Booking Form
     const genericBookingForm = document.getElementById('genericBookingForm');
+    const videoSlider = document.getElementById('video-slider');
+    const videoButtons = document.querySelectorAll('.vid-btn');
+
     if (genericBookingForm) {
         genericBookingForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -55,6 +60,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Video Slider Logic
+    
+    let currentIndex = 0;
+    const slideInterval = 5000; // 5 seconds
+
+    function showNextVideo() {
+        // Increment the index to move to the next video
+        currentIndex = (currentIndex + 1) % videoButtons.length;
+        
+        // Update the video source based on the new index
+        const newVideoSrc = videoButtons[currentIndex].getAttribute('data-src');
+        videoSlider.src = newVideoSrc;
+        
+        // Update the active class on the video buttons
+        document.querySelector('.vid-btn.active').classList.remove('active');
+        videoButtons[currentIndex].classList.add('active');
+    }
+
+    // Set up the interval to automatically change the video
+    setInterval(showNextVideo, slideInterval);
+
+    // Manual video change
+    videoButtons.forEach((btn, index) => {
+        btn.addEventListener('click', function() {
+            // Update the current index
+            currentIndex = index;
+
+            // Update the video source
+            const newVideoSrc = btn.getAttribute('data-src');
+            videoSlider.src = newVideoSrc;
+
+            // Update the active class
+            document.querySelector('.vid-btn.active').classList.remove('active');
+            btn.classList.add('active');
+        });
+    });
+
     // Other existing JavaScript code for form handling, UI interactions, etc.
 
     let searchBtn = document.querySelector('#search-btn');
@@ -64,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let formClose = document.querySelector('#form-close');
     let menu = document.querySelector('#menu-bar');
     let navbar = document.querySelector('.navbar');
-    let videoBtn = document.querySelectorAll('.vid-btn');
 
     window.onscroll = () => {
         if (searchBtn) searchBtn.classList.remove('fa-times');
@@ -99,17 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
             loginForm.classList.remove('active');
         });
     }
-
-    videoBtn.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const activeControl = document.querySelector('.controls .active');
-            if (activeControl) activeControl.classList.remove('active');
-            btn.classList.add('active');
-            const src = btn.getAttribute('data-src');
-            const videoSlider = document.querySelector('#video-slider');
-            if (videoSlider) videoSlider.src = src;
-        });
-    });
 
     // Review Form Submission
     const reviewForm = document.getElementById('reviewForm');
