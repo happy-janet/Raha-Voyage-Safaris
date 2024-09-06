@@ -174,8 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(showNextBlog, 5000);
 
 });
-<<<<<<< Updated upstream
-=======
 function selectPaymentMethod(paymentMethod) {
     const amount = document.getElementById('amount').value;
     const email = document.getElementById('email').value;
@@ -223,4 +221,3 @@ function closeModal() {
     modal.style.display = 'none';  // Hide the modal
 }
 
->>>>>>> Stashed changes
