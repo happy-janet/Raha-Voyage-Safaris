@@ -5,6 +5,11 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const SafariBooking = require('./Models/safariBookingModel');
 const Booking = require('./Models/Booking'); 
+const cors = require('cors');
+const OAuth = require('oauth-1.0a');
+const crypto = require('crypto');
+const request = require('request');
+const axios = require('axios');  // Use axios for HTTP requests
 
 const app = express();
 
@@ -104,8 +109,68 @@ app.post('/book-safari', async (req, res) => {
     }
 });
 
-// Start the server using environment variable for port
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// OAuth setup
+const oauth = OAuth({
+    consumer: {
+        key: process.env.PESAPAL_CONSUMER_KEY,
+        secret: process.env.PESAPAL_CONSUMER_SECRET
+    },
+    signature_method: 'HMAC-SHA1',
+    hash_function: (base_string, key) => crypto.createHmac('sha1', key).update(base_string).digest('base64')
 });
+// Handle Pesapal payment processing
+app.post('/pesapal-payment', async (req, res) => {
+    const { amount, email, phone } = req.body;
+
+    try {
+        const pesapalUrl = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest"; // Sandbox URL
+        
+        // Prepare the payment data
+        const paymentData = {
+            amount,
+            currency: "KES",
+            description: 'Payment for service',
+            callback_url: "http://localhost:3000/callback",  // Update to your callback URL
+            billing_address: {
+                email_address: email,
+                phone_number: phone,
+            }
+        };
+
+        // OAuth authorization
+        const request_data = {
+            url: pesapalUrl,
+            method: 'POST',
+            data: paymentData
+        };
+
+        const headers = oauth.toHeader(oauth.authorize(request_data));
+
+        // Make the request to Pesapal Sandbox
+        const response = await axios.post(pesapalUrl, paymentData, { headers });
+
+        // Return the redirect URL for Pesapal
+        if (response.data.redirect_url) {
+            res.json({ redirectUrl: response.data.redirect_url });
+        } else {
+            res.status(500).send('Payment failed');
+        }
+
+    } catch (error) {
+        console.error('Pesapal Payment Error:', error);
+        res.status(500).send('Payment Error');
+    }
+});
+
+
+
+
+// Server startup
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
