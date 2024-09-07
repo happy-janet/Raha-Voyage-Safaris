@@ -212,36 +212,32 @@ function showNextBlog() {
 // Transition to the next blog every 5 seconds
 setInterval(showNextBlog, 5000);
 
-function openPayment(paymentMethod) {
-    const modal = document.getElementById('payment-modal');
-    const iframe = document.getElementById('payment-frame');
-  
-    // Set the payment URL based on the selected method
-    switch (paymentMethod) {
-      case 'pesapal':
-        iframe.src = 'https://pesapal.com';
-        break;
-      case 'visa':
-        iframe.src = 'https://www.visa.com';
-        break;
-      case 'mastercard':
-        iframe.src = 'https://www.mastercard.com';
-        break;
-      case 'mtn':
-        iframe.src = 'https://mobilemoney.mtn.co.ug';
-        break;
-      case 'airtel':
-        iframe.src = 'https://airtel.co.ug/airtelmoney';
-        break;
-      default:
-        iframe.src = '';
+function openPayment(method) {
+    const paymentFrame = document.getElementById('payment-frame');
+
+    if (method === 'pesapal') {
+      // Call your backend server to generate the Pesapal iframe URL
+      fetch('/create-pesapal-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ amount: 1000 }) // Replace with actual amount and data
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.paymentUrl) {
+          paymentFrame.src = data.paymentUrl;
+          document.getElementById('payment-modal').style.display = 'block';
+        } else {
+          alert('Failed to create payment request.');
+        }
+      })
+      .catch(error => console.error('Error:', error));
     }
-  
-    modal.style.display = 'block'; // Show the modal
   }
-  
+
   function closeModal() {
-    const modal = document.getElementById('payment-modal');
-    modal.style.display = 'none'; // Hide the modal
+    document.getElementById('payment-modal').style.display = 'none';
+    document.getElementById('payment-frame').src = ''; // Clear the iframe src to stop payment processing
   }
-  
