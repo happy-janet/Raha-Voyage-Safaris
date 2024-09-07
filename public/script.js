@@ -206,23 +206,6 @@ function selectPaymentMethod(paymentMethod) {
 }
 
 
-<<<<<<< Updated upstream
-function closeDialog() {
-    const dialog = document.getElementById('payment-dialog');
-    dialog.style.display = 'none';  // Hide the dialog
-}
-
-function cancelPayment() {
-    document.getElementById('payment-form').reset();  // Reset form fields
-    closeDialog();  // Close the dialog
-}
-
-function closeModal() {
-    const modal = document.getElementById('payment-modal');
-    modal.style.display = 'none';  // Hide the modal
-}
-
-=======
 function openPayment(paymentMethod) {
     const paymentData = {
         method: paymentMethod // This will now be sent based on user selection
@@ -260,4 +243,3 @@ function openPayment(paymentMethod) {
     modal.style.display = 'none'; // Hide the modal
   }
   
->>>>>>> Stashed changes

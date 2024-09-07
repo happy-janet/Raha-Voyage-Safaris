@@ -124,45 +124,22 @@ const oauth = OAuth({
     signature_method: 'HMAC-SHA1',
     hash_function: (base_string, key) => crypto.createHmac('sha1', key).update(base_string).digest('base64')
 });
-<<<<<<< Updated upstream
-
-=======
 // Handle Pesapal payment processing
->>>>>>> Stashed changes
 app.post('/pesapal-payment', async (req, res) => {
     const { amount, email, phone } = req.body;
 
     try {
-<<<<<<< Updated upstream
-        // Use the sandbox URL for development and testing
-        const pesapalUrl = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest";  // Sandbox URL
-=======
         const pesapalUrl = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest"; // Sandbox URL
->>>>>>> Stashed changes
         
         // Prepare the payment data
         const paymentData = {
             amount,
             currency: "KES",
             description: 'Payment for service',
-<<<<<<< Updated upstream
-            callback_url: "https://yourwebsite.com/callback",  // Update to your callback URL
-            notification_id: "unique-notification-id",
-            billing_address: {
-                email_address: email,
-                phone_number: phone,
-                first_name: "John", // Replace with actual data
-                last_name: "Doe",   // Replace with actual data
-                line_1: "Address Line 1",
-                city: "City",
-                postal_code: "00100",
-                country_code: "KE"
-=======
             callback_url: "http://localhost:3000/callback",  // Update to your callback URL
             billing_address: {
                 email_address: email,
                 phone_number: phone,
->>>>>>> Stashed changes
             }
         };
 
@@ -192,11 +169,8 @@ app.post('/pesapal-payment', async (req, res) => {
 });
 
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 // Server startup
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
