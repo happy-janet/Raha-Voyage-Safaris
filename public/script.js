@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(showNextBlog, 5000);
 
 });
+
 function selectPaymentMethod(paymentMethod) {
     const amount = document.getElementById('amount').value;
     const email = document.getElementById('email').value;
@@ -236,10 +237,9 @@ function openPayment(paymentMethod) {
         alert('Failed to process payment. Please try again later.');
     });
 }
-
   
   function closeModal() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'none'; // Hide the modal
   }
-  
+

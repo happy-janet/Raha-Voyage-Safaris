@@ -629,58 +629,42 @@
 <section class="payment-section">
     <h2>Make a Secure Online Payment</h2>
     <div class="payment-container">
-        <button onclick="selectPaymentMethod('pesapal')"> 
-            <img src="./pesapal.png" alt="Pesapal">
-        </button>
-        <button onclick="selectPaymentMethod('visa')">
-            <img src="./visa.png" alt="Visa">
-        </button>
-        <button onclick="selectPaymentMethod('mastercard')">
-            <img src="./mastercard.png" alt="Mastercard">
-        </button>
-        <button onclick="selectPaymentMethod('mtn')">
-            <img src="./mtn.png" alt="MTN Mobile Money">
-        </button>
-        <button onclick="selectPaymentMethod('airtel')">
-            <img src="./airtel.png" alt="Airtel Money">
-        </button>
+
+      <button onclick="openPayment('pesapal')"> 
+        <img src="./pesapal.png" alt="Pesapal">
+      </button>
+      <button onclick="openPayment('visa')">
+        <img src="./visa.png" alt="Visa">
+      </button>
+      <button onclick="openPayment('mastercard')">
+        <img src="./mastercard.png" alt="Mastercard">
+      </button>
+      <button onclick="openPayment('mtn')">
+        <img src="./mtn.png" alt="MTN Mobile Money">
+      </button>
+      <button onclick="openPayment('airtel')">
+        <img src="./airtel.png" alt="Airtel Money">
+      </button>
+    </div>
+  </section>
+
+  <!-- Payment Details Section -->
+<section class="payment-details">
+    <h2>Bank and Mobile Money Details</h2>
+    <div class="details-container">
+        <p><strong>Bank Account:</strong> Account Name: Your Name, Account Number: 1234567890, Bank: Your Bank</p>
+        <p><strong>MTN Mobile Money:</strong> Phone Number: 0767104774</p>
+        <p><strong>Airtel Money:</strong> Phone Number: 0759960242</p>
     </div>
 </section>
-
-<!-- Payment Modal Dialog -->
-<div id="payment-dialog" class="dialog" style="display:none;">
-    <div class="dialog-content">
-        <span class="close" onclick="closeDialog()">&times;</span>
-        <h3>Enter Payment Details</h3>
-        <form id="payment-form">
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" required><br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required><br>
-
-            <input type="hidden" id="payment-method" name="payment-method">
-
-            <div class="dialog-buttons">
-                <button type="button" onclick="submitPayment()">Submit Payment</button>
-                <button type="button" onclick="cancelPayment()">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<!-- Payment Modal -->
-<div id="payment-modal" class="modal">
+  
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <iframe id="payment-frame" src="" width="100%" height="300px"></iframe>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <iframe id="payment-frame" src="" width="100%" height="300px"></iframe>
     </div>
-</div>
-
+  </div>
   
 
 <!-- footer section start -->
