@@ -206,6 +206,7 @@ function selectPaymentMethod(paymentMethod) {
 }
 
 
+<<<<<<< Updated upstream
 function closeDialog() {
     const dialog = document.getElementById('payment-dialog');
     dialog.style.display = 'none';  // Hide the dialog
@@ -221,3 +222,42 @@ function closeModal() {
     modal.style.display = 'none';  // Hide the modal
 }
 
+=======
+function openPayment(paymentMethod) {
+    const paymentData = {
+        method: paymentMethod // This will now be sent based on user selection
+    };
+
+    // Automatically submit the payment and redirect the user
+    fetch('http://localhost:3000/pesapal-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+    })    
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.redirectUrl) {
+            // Redirect to Pesapal payment page
+            window.location.href = data.redirectUrl;
+        } else {
+            alert('Payment failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to process payment. Please try again later.');
+    });
+}
+
+  
+  function closeModal() {
+    const modal = document.getElementById('payment-modal');
+    modal.style.display = 'none'; // Hide the modal
+  }
+  
+>>>>>>> Stashed changes
