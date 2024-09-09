@@ -12,10 +12,14 @@
   "dependencies": {
     "axios": "^1.7.7",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "helmet": "^7.1.0",
     "mongoose": "^8.5.4",
     "nodemailer": "^6.9.14",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "oauth-1.0a": "^2.2.6",
+    "request": "^2.88.2"
   }
 }

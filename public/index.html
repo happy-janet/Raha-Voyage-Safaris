@@ -210,7 +210,7 @@
             <div class="box">
                 <img src="gorilla1.png" alt="">
                 <div class="content">
-                    <h3><i class="fas fa-map-marker-alt"></i>Uganda Gorilla and Wildlife Safari</h3>
+                    <h3><i class="fas fa-map-marker-alt"></i>Uganda Gorilla and Wildlife Safari (7-Days)</h3>
                     <p>The Uganda Gorilla and Wildlife Safari is a thrilling 
                         adventure that takes you deep into Bwindi Forest to encounter 
                         mountain gorillas up close, alongside exciting game drives, boat 
@@ -609,25 +609,46 @@
         </div>
     </div>
 </section>
-
-<!-- Payment Section -->
+<!-- Updated Payment Section -->
 <section class="payment-section">
     <h2>Make a Secure Online Payment</h2>
     <div class="payment-container">
       <button onclick="openPayment('pesapal')"> 
         <img src="./pesapal.png" alt="Pesapal">
       </button>
+      <button onclick="openPayment('visa')">
+        <img src="./visa.png" alt="Visa">
+      </button>
+      <button onclick="openPayment('mastercard')">
+        <img src="./mastercard.png" alt="Mastercard">
+      </button>
+      <button onclick="openPayment('mtn')">
+        <img src="./mtn.png" alt="MTN Mobile Money">
+      </button>
+      <button onclick="openPayment('airtel')">
+        <img src="./airtel.png" alt="Airtel Money">
+      </button>
     </div>
-  </section>
-  
-  <!-- Payment Modal -->
-  <div id="payment-modal" class="modal">
+</section>
+
+<!-- Payment Details Section -->
+<section class="payment-details">
+    <h2>Bank and Mobile Money Details</h2>
+    <div class="details-container">
+        <p><strong>Bank Account:</strong> Account Name: Your Name, Account Number: 1234567890, Bank: Your Bank</p>
+        <p><strong>MTN Mobile Money:</strong> Phone Number: 0771234567</p>
+        <p><strong>Airtel Money:</strong> Phone Number: 0701234567</p>
+    </div>
+</section>
+
+<!-- Payment Modal -->
+<div id="payment-modal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <iframe id="payment-frame" src="" width="100%" height="400px"></iframe>
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="payment-frame" src="" width="100%" height="300px"></iframe>
     </div>
-  </div>
-  
+</div>
+
 
 <!-- footer section start -->
 <section class="footer">
