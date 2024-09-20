@@ -1,55 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Safari Booking Form
+    // Initialize all functionalities
+    initSafariBookingForm();
+    initGenericBookingForm();
+    initVideoSlider();
+    initHeaderNavbarLogic();
+    initBlogSlider();
+    initReviewForm();
+    initNewsletterForm();
+});
+
+// Function to initialize safari booking form submission
+function initSafariBookingForm() {
     const safariBookingForm = document.getElementById('safariBookingForm');
     if (safariBookingForm) {
-        safariBookingForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(safariBookingForm);
-            const data = Object.fromEntries(formData.entries());
-
-            fetch('/book-safari', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(result => {
-                alert('Safari Booking Submitted Successfully');
-                safariBookingForm.reset(); // Clear the form
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting booking. Please try again.');
-            });
+        safariBookingForm.addEventListener('submit', (e) => {
+            handleFormSubmission(e, safariBookingForm, '/book-safari', 'Safari Booking Submitted Successfully');
         });
     }
+}
 
-    // Generic Booking Form
+// Function to initialize generic booking form submission
+function initGenericBookingForm() {
     const genericBookingForm = document.getElementById('genericBookingForm');
     if (genericBookingForm) {
-        genericBookingForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(genericBookingForm);
-            const data = Object.fromEntries(formData.entries());
-
-            fetch('/book', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(result => {
-                alert('Booking Submitted Successfully');
-                genericBookingForm.reset(); // Clear the form
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting booking. Please try again.');
-            });
+        genericBookingForm.addEventListener('submit', (e) => {
+            handleFormSubmission(e, genericBookingForm, '/book', 'Booking Submitted Successfully');
         });
     }
+}
 
-    // Video Slider Logic
+// Generic function to handle form submissions
+function handleFormSubmission(event, formElement, url, successMessage) {
+    event.preventDefault();
+    const formData = new FormData(formElement);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(() => {
+        alert(successMessage);
+        formElement.reset(); // Clear the form
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting form. Please try again.');
+    });
+}
+
+// Function to initialize video slider logic
+function initVideoSlider() {
     const videoSlider = document.getElementById('video-slider');
     const videoButtons = document.querySelectorAll('.vid-btn');
     let currentIndex = 0;
@@ -57,25 +60,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showNextVideo() {
         currentIndex = (currentIndex + 1) % videoButtons.length;
-        const newVideoSrc = videoButtons[currentIndex].getAttribute('data-src');
-        videoSlider.src = newVideoSrc;
-        document.querySelector('.vid-btn.active').classList.remove('active');
-        videoButtons[currentIndex].classList.add('active');
+        updateVideoSlider(videoSlider, videoButtons, currentIndex);
     }
 
     setInterval(showNextVideo, slideInterval);
 
     videoButtons.forEach((btn, index) => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', () => {
             currentIndex = index;
-            const newVideoSrc = btn.getAttribute('data-src');
-            videoSlider.src = newVideoSrc;
-            document.querySelector('.vid-btn.active').classList.remove('active');
-            btn.classList.add('active');
+            updateVideoSlider(videoSlider, videoButtons, currentIndex);
         });
     });
+}
 
-    // Header, Navbar, and Login Form Logic
+// Helper function to update video slider
+function updateVideoSlider(videoSlider, videoButtons, index) {
+    const newVideoSrc = videoButtons[index].getAttribute('data-src');
+    videoSlider.src = newVideoSrc;
+    document.querySelector('.vid-btn.active').classList.remove('active');
+    videoButtons[index].classList.add('active');
+}
+
+// Function to initialize header, navbar, and login form logic
+function initHeaderNavbarLogic() {
     const searchBtn = document.querySelector('#search-btn');
     const searchBar = document.querySelector('.search-bar-container');
     const formBtn = document.querySelector('#login-btn');
@@ -84,25 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const menu = document.querySelector('#menu-bar');
     const navbar = document.querySelector('.navbar');
 
-    window.onscroll = () => {
-        if (searchBtn) searchBtn.classList.remove('fa-times');
-        if (searchBar) searchBar.classList.remove('active');
-        if (menu) menu.classList.remove('fa-times');
-        if (navbar) navbar.classList.remove('active');
-        if (loginForm) loginForm.classList.remove('active');
-    };
+    window.onscroll = () => closeMenus([searchBtn, searchBar, menu, navbar, loginForm]);
 
     if (menu) {
         menu.addEventListener('click', () => {
-            menu.classList.toggle('fa-times');
-            navbar.classList.toggle('active');
+            toggleActive(menu, navbar);
         });
     }
 
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
-            searchBtn.classList.toggle('fa-times');
-            searchBar.classList.toggle('active');
+            toggleActive(searchBtn, searchBar);
         });
     }
 
@@ -117,69 +116,72 @@ document.addEventListener("DOMContentLoaded", () => {
             loginForm.classList.remove('active');
         });
     }
+}
 
-    // Review Form Submission
-    const reviewForm = document.getElementById('reviewForm');
-    if (reviewForm) {
-        reviewForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const rating = document.getElementById('rating').value;
-            const review = document.getElementById('review').value.trim();
+// Helper function to close all menus
+function closeMenus(elements) {
+    elements.forEach(element => element && element.classList.remove('active', 'fa-times'));
+}
 
-            if (name === '' || review === '' || rating === '') {
-                alert('Please fill out all fields.');
-                return;
-            }
+// Helper function to toggle active classes
+function toggleActive(...elements) {
+    elements.forEach(element => element && element.classList.toggle('active'));
+}
 
-            if (name.length < 3) {
-                alert('Name must be at least 3 characters long.');
-                return;
-            }
-
-            if (review.length < 10) {
-                alert('Review must be at least 10 characters long.');
-                return;
-            }
-
-            const newReview = document.createElement('div');
-            newReview.classList.add('box');
-
-            const starHTML = `<i class="fas fa-star"></i>`.repeat(rating) +
-                `<i class="far fa-star"></i>`.repeat(5 - rating);
-
-            newReview.innerHTML = `
-                <img src="default-avatar.jpg" alt="">
-                <h3>${name}</h3>
-                <p>${review}</p>
-                <div class="stars">${starHTML}</div>
-            `;
-
-            const reviewSliderWrapper = document.querySelector('.review-slider .wrapper');
-            if (reviewSliderWrapper) reviewSliderWrapper.appendChild(newReview);
-            reviewForm.reset();
-        });
-    }
-
-    // Blog Slider
+// Function to initialize blog slider
+function initBlogSlider() {
     const blogContents = document.querySelectorAll('.blog-content');
     let blogIndex = 0;
 
-    function showNextBlog() {
+    setInterval(() => {
         blogContents[blogIndex].classList.remove('active');
         blogIndex = (blogIndex + 1) % blogContents.length;
         blogContents[blogIndex].classList.add('active');
+    }, 5000);
+}
+
+// Function to initialize review form submission
+function initReviewForm() {
+    const reviewForm = document.getElementById('review-form');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const clientName = document.getElementById('client-name').value;
+            const clientReview = document.getElementById('client-review').value;
+            const clientRating = document.getElementById('client-rating').value;
+
+            const reviewData = { clientName, clientReview, clientRating };
+
+            handleFormSubmission(e, reviewForm, '/submit-review', 'Review submitted successfully!');
+        });
     }
+}
 
-    setInterval(showNextBlog, 5000);
+// Function to initialize newsletter form submission
+function initNewsletterForm() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            const subscriptionData = { email };
 
-});
+            handleFormSubmission(e, newsletterForm, '/subscribe-newsletter', 'Subscription successful!');
+        });
+    }
+}
 
 // Function to handle payment method selection and submission
 function selectPaymentMethod(paymentMethod) {
     const amount = document.getElementById('amount').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
+
+    // Validate input fields
+    if (!amount || !email || !phone) {
+        alert('Please fill in all the required fields.');
+        return;
+    }
 
     const paymentData = {
         amount: amount,
@@ -194,42 +196,58 @@ function selectPaymentMethod(paymentMethod) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(paymentData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to initiate payment');
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.redirectUrl) {
-            window.location.href = data.redirectUrl; // Redirect to Pesapal payment page
+            window.location.href = data.redirectUrl; // Redirect to the Pesapal payment page
         } else {
-            alert('Payment failed');
+            alert('Payment failed: ' + (data.message || 'Unknown error'));
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error initiating payment. Please try again.');
+    });
 }
 
 // Function to open the payment modal with a specific method
 function openPayment(method) {
     const paymentFrame = document.getElementById('payment-frame');
 
-    if (method === 'pesapal') {
-        fetch('/create-pesapal-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: 1000 }) // Replace with actual amount and data
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.paymentUrl) {
-                paymentFrame.src = data.paymentUrl;
-                document.getElementById('payment-modal').style.display = 'block';
-            } else {
-                alert('Failed to create payment request.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
+    fetch('/create-pesapal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 1000 }) // Replace with actual amount and data
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to create payment request');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.paymentUrl) {
+            paymentFrame.src = data.paymentUrl;
+            document.getElementById('payment-modal').style.display = 'block';
+        } else {
+            alert('Failed to create payment request: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error opening payment modal. Please try again.');
+    });
 }
 
 // Function to close the payment modal
 function closeModal() {
-    document.getElementById('payment-modal').style.display = 'none';
-    document.getElementById('payment-frame').src = ''; // Clear the iframe src to stop payment processing
+    const paymentModal = document.getElementById('payment-modal');
+    const paymentFrame = document.getElementById('payment-frame');
+    paymentModal.style.display = 'none';
+    paymentFrame.src = ''; // Clear the iframe src to stop payment processing
 }

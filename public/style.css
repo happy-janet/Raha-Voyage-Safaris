@@ -75,6 +75,7 @@ header {
     width: 50px; /* Adjust size according to your logo */
     height: auto;
     margin-right: 10px; /* Space between logo and text */
+    border-radius: 10px;
   }
   
   .logo span {
@@ -983,6 +984,21 @@ background: #222;
     transform: rotate(360deg);
 }
 
+.read-more-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: var(--orange);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.read-more-button:hover {
+    background-color: var(--orange);
+}
+
+
 .modal {
     display: none;
     position: fixed;
@@ -1018,122 +1034,39 @@ background: #222;
     cursor: pointer;
 }
 
-/* Payment Section Styling */
-.payment-section {
-    padding: 20px;
-    background-color: #f7f7f7; /* Light background color for contrast */
-    text-align: center;
-}
 
-.payment-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.payment-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px; /* Space between buttons */
-}
-
-.payment-container button {
-    background: none;
+.view-hotels-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: var(--orange);
+    color: #fff;
     border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.payment-container button:hover {
-    transform: scale(1.1); /* Zoom effect on hover */
-}
-
-.payment-container img {
-    width: 80px;
-    height: auto;
-    display: block;
-    margin: auto;
-}
-
-/* Payment Details Section Styling */
-.payment-details {
-    padding: 20px;
-    background-color: #fff;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.payment-details h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.details-container {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
+    border-radius: 4px;
     font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.details-container p {
-    margin-bottom: 10px;
-}
-
-/* Payment Modal Styling */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 10% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
+    text-align: center;
     text-decoration: none;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .payment-container {
-        flex-direction: column;
-        align-items: center;
-    }
+.view-hotels-btn:hover {
+    background: #e59400; /* Darker shade of orange for hover effect */
+}
 
-    .payment-container button {
-        margin-bottom: 10px;
-    }
+.payment-section {
+    text-align: center;
+    margin: 20px;
+}
 
-    .modal-content {
-        width: 90%;
-    }
+.pesapal-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.pesapal-button img {
+    width: 150px; /* Adjust the size of the icon as needed */
+    height: auto;
 }

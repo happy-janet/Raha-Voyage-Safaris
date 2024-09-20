@@ -3,25 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const axios = require('axios');
-const SafariBooking = require('./Models/safariBookingModel');
-const Booking = require('./Models/Booking');
-const cors = require('cors');
-const helmet = require('helmet');
-const OAuth = require('oauth-1.0a');
-const crypto = require('crypto');
+const path = require('path');
 const app = express();
 
 // Middleware
-app.use(express.static('public')); // Serve static files
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from 'public' folder
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded form data
 app.use(bodyParser.json()); // Parse JSON form data
-app.use(cors({
-    origin: 'https://your-frontend-domain.com', // Replace with your frontend domain
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.use(helmet()); // Set security headers
 
 // Connect to MongoDB
 const mongoURI = process.env.MONGO_URI;
@@ -57,106 +45,40 @@ const sendEmail = async (recipient, subject, text) => {
     }
 };
 
+// Serve the home page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Handle contact form submissions
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, email, number, subject, message } = req.body;
+        const emailContent = `
+            Name: ${name}
+            Email: ${email}
+            Phone Number: ${number}
+            Subject: ${subject}
+            Message: ${message}
+        `;
+        await sendEmail(process.env.EMAIL_USER, `New Contact Form Submission: ${subject}`, emailContent);
+        res.send('Your message has been sent successfully!');
+    } catch (err) {
+        console.error('Error handling contact form submission:', err.message);
+        res.status(500).send('Failed to send your message. Please try again later.');
+    }
+});
+
 // Serve the booking form
 app.get('/book', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Handle form submissions (general booking form)
-app.post('/book', async (req, res) => {
-    try {
-        const bookingData = req.body;
-        const newBooking = new Booking(bookingData);
+// ... (rest of your existing routes)
 
-        await newBooking.save(); // Await the save operation
-
-        // Send confirmation email
-        await sendEmail(
-            process.env.EMAIL_USER,
-            'New Booking',
-            `New booking received:\n\n${JSON.stringify(bookingData, null, 2)}`
-        );
-
-        res.send('Booking Submitted Successfully');
-    } catch (err) {
-        console.error('Error saving booking:', err.message);
-        res.status(500).send(`Error saving booking: ${err.message}`);
-    }
-});
-
-// Serve the Safari booking form
-app.get('/book-safari', (req, res) => {
-    res.sendFile(__dirname + '/public/safari-booking-form.html');
-});
-
-// Handle form submissions (safari booking form)
-app.post('/book-safari', async (req, res) => {
-    try {
-        const safariData = req.body;
-        const newBooking = new SafariBooking(safariData);
-
-        await newBooking.save();
-
-        // Send confirmation email
-        await sendEmail(
-            process.env.EMAIL_USER,
-            'New Safari Booking',
-            `New safari booking received:\n\n${JSON.stringify(safariData, null, 2)}`
-        );
-
-        res.send('Safari Booking Submitted Successfully');
-    } catch (err) {
-        console.error('Error saving booking:', err.message);
-        res.status(500).send(`Error saving booking: ${err.message}`);
-    }
-});
-
-// Pesapal Payment Integration
-app.post('/create-pesapal-order', async (req, res) => {
-    const { amount, email } = req.body;
-    const orderReference = `ORD-${Math.floor(Math.random() * 1000000)}`;
-
-    try {
-        // Get OAuth Token from Pesapal
-        const tokenResponse = await axios.post('https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken', {}, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Basic ${Buffer.from(`${process.env.PESAPAL_CONSUMER_KEY}:${process.env.PESAPAL_CONSUMER_SECRET}`).toString('base64')}`
-            }
-        });
-
-        if (!tokenResponse.data || !tokenResponse.data.token) {
-            throw new Error('Failed to obtain OAuth token from Pesapal.');
-        }
-        const { token } = tokenResponse.data;
-
-        // Post the Direct Order to Pesapal
-        const orderData = {
-            Amount: amount,
-            Currency: 'UGX',
-            Description: 'Payment for services',
-            Type: 'MERCHANT',
-            Reference: orderReference,
-            Email: email
-        };
-
-        const orderResponse = await axios.post('https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest', orderData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
-
-        if (!orderResponse.data || !orderResponse.data.redirect_url) {
-            throw new Error('Failed to create Pesapal order.');
-        }
-
-        res.json({ paymentUrl: orderResponse.data.redirect_url });
-
-    } catch (error) {
-        console.error('Error creating Pesapal order:', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: error.message || 'Failed to create Pesapal order' });
-    }
+// Fallback for undefined routes (404 error)
+app.get('*', (req, res) => {
+    res.status(404).send('Page not found');
 });
 
 // Start the server
