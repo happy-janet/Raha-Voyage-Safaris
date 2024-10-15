@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initBlogSlider();
     initReviewForm();
     initNewsletterForm();
+    initPesapalPayment();
 });
 
 // Function to initialize safari booking form submission
@@ -48,6 +49,96 @@ function handleFormSubmission(event, formElement, url, successMessage) {
     .catch(error => {
         console.error('Error:', error);
         alert('Error submitting form. Please try again.');
+    });
+}
+
+// Pesapal Payment Integration
+function initPesapalPayment() {
+    const pesapalForm = document.getElementById('pesapalPaymentForm');
+    if (pesapalForm) {
+        pesapalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handlePesapalPayment(pesapalForm);
+        });
+    }
+}
+
+// Function to handle Pesapal payment submission
+function handlePesapalPayment(formElement) {
+    const formData = new FormData(formElement);
+    const paymentData = {
+        amount: formData.get('amount'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        description: 'Payment for Service' // Adjust based on what you're selling
+    };
+
+    fetch('/create-pesapal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to create Pesapal order');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.redirectUrl) {
+            // Redirect to Pesapal payment page
+            window.location.href = data.redirectUrl;
+        } else {
+            alert('Failed to create Pesapal order: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error creating Pesapal order. Please try again.');
+    });
+}
+
+// Function to handle payment method selection and submission
+function selectPaymentMethod(paymentMethod) {
+    const amount = document.getElementById('amount').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    // Validate input fields
+    if (!amount || !email || !phone) {
+        alert('Please fill in all the required fields.');
+        return;
+    }
+
+    const paymentData = {
+        amount: amount,
+        description: "Payment for service",
+        email: email,
+        phone: phone,
+        method: paymentMethod
+    };
+
+    fetch('/pesapal-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to initiate payment');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.redirectUrl) {
+            window.location.href = data.redirectUrl; // Redirect to the Pesapal payment page
+        } else {
+            alert('Payment failed: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error initiating payment. Please try again.');
     });
 }
 
@@ -162,92 +253,7 @@ function initNewsletterForm() {
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('newsletter-email').value;
-            const subscriptionData = { email };
-
             handleFormSubmission(e, newsletterForm, '/subscribe-newsletter', 'Subscription successful!');
         });
     }
-}
-
-// Function to handle payment method selection and submission
-function selectPaymentMethod(paymentMethod) {
-    const amount = document.getElementById('amount').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-
-    // Validate input fields
-    if (!amount || !email || !phone) {
-        alert('Please fill in all the required fields.');
-        return;
-    }
-
-    const paymentData = {
-        amount: amount,
-        description: "Payment for service",
-        email: email,
-        phone: phone,
-        method: paymentMethod
-    };
-
-    fetch('/pesapal-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(paymentData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to initiate payment');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.redirectUrl) {
-            window.location.href = data.redirectUrl; // Redirect to the Pesapal payment page
-        } else {
-            alert('Payment failed: ' + (data.message || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error initiating payment. Please try again.');
-    });
-}
-
-// Function to open the payment modal with a specific method
-function openPayment(method) {
-    const paymentFrame = document.getElementById('payment-frame');
-
-    fetch('/create-pesapal-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: 1000 }) // Replace with actual amount and data
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to create payment request');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.paymentUrl) {
-            paymentFrame.src = data.paymentUrl;
-            document.getElementById('payment-modal').style.display = 'block';
-        } else {
-            alert('Failed to create payment request: ' + (data.message || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error opening payment modal. Please try again.');
-    });
-}
-
-// Function to close the payment modal
-function closeModal() {
-    const paymentModal = document.getElementById('payment-modal');
-    const paymentFrame = document.getElementById('payment-frame');
-    paymentModal.style.display = 'none';
-    paymentFrame.src = ''; // Clear the iframe src to stop payment processing
 }

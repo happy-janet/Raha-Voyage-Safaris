@@ -639,14 +639,13 @@
 <!-- Updated Payment Section -->
 <section class="payment-section">
     <h2>Make a Secure Online Payment</h2>
-    <form action="/pay" method="post" id="paymentForm">
-        <input type="hidden" name="amount" value="10.00" />
-        <input type="hidden" name="currency" value="USD" />
-        <input type="hidden" name="description" value="Payment for Order #123" />
-        <button type="submit" class="pesapal-button">
-            <img src="pesapal2.png" alt="Pay with Pesapal" />
+    <!-- Redirect to Pesapal payment page with icon -->
+    <a href="https://store.pesapal.com/rahavoyagessafaris" target="_blank">
+        <button type="button" class="pesapal-button">
+            <img src="pesapal2.png" alt="Pesapal Icon" style="width: 100px; height: 80px; vertical-align: middle; margin-right: 8px;" />
+            Pay with Pesapal
         </button>
-    </form>
+    </a>
 </section>
 
 <!-- Payment Details Section -->
