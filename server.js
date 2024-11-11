@@ -145,7 +145,13 @@ app.post('/book-safari', async (req, res) => {
     }
 });
 
+app.get('/blog1', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', './blog1.html'));
+});
 
+app.get('/blog2', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', './blog2.html'));
+});
 app.get('/murchison-falls', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', './murchison-falls.html'));
 });
