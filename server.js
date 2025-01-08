@@ -519,7 +519,8 @@ app.post("/gorilla", async (req, res) => {
 app.post("/book", async (req, res) => {
   try {
     // Capture all fields from the generic booking form
-    const { placeName, numberOfGuests, arrivalDate, leavingDate } = req.body;
+    const { placeName, numberOfGuests, arrivalDate, leavingDate, email } =
+      req.body;
 
     // Process the booking data
     console.log("General Booking Data:", {
@@ -529,10 +530,17 @@ app.post("/book", async (req, res) => {
       leavingDate,
     });
 
-    // Send confirmation email to the client (optional)
+    // Send confirmation email to the client
     const clientSubject = "Booking Confirmation";
     const clientText = `Thank you for your booking!\n\nDetails:\n- Place: ${placeName}\n- Number of Guests: ${numberOfGuests}\n- Arrival Date: ${arrivalDate}\n- Leaving Date: ${leavingDate}`;
-    await sendEmail(req.body.email, clientSubject, clientText); // Assuming you have the email in the request body
+    await sendEmail(email, clientSubject, clientText); // Send email to client
+
+    // Prepare the email to the company
+    const companySubject = "New General Booking Received";
+    const companyText = `New booking received!\n\nDetails:\n- Place: ${placeName}\n- Number of Guests: ${numberOfGuests}\n- Arrival Date: ${arrivalDate}\n- Leaving Date: ${leavingDate}`;
+
+    // Send email to the company
+    await sendEmail("rahavoyagesafaris@gmail.com", companySubject, companyText);
 
     // Respond to the client
     res.send("Your booking has been received!");
