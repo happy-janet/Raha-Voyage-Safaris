@@ -1057,6 +1057,7 @@ background: #222;
 .payment-section {
     text-align: center;
     margin: 20px;
+    font-size: 2rem;
 }
 
 .pesapal-button {
@@ -1067,8 +1068,8 @@ background: #222;
 }
 
 .pesapal-button img {
-    width: 150px; /* Adjust the size of the icon as needed */
-    height: auto;
+    width: 300px; /* Adjust the size of the icon as needed */
+    height: 200px;
 }
 
 .modal {
@@ -1113,4 +1114,19 @@ background: #222;
 
 .details-container p {
     margin: 10px 0;
+}
+
+.payment-details  h2 {
+    color: #ffa500;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.detail-container {
+    color: #ffa500;
+    background-color: #333;
+    border-radius: 10px;
+    text-align: center;
+    padding: 50px;
+    font-size: small;
 }
