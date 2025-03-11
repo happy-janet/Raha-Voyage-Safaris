@@ -1130,3 +1130,21 @@ background: #222;
     padding: 50px;
     font-size: small;
 }
+
+
+.whatsapp-icon {
+    position: fixed;
+    left: 20px;
+    bottom: 100px;
+    font-size: 40px;
+    color: green;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-icon:hover {
+    transform: scale(1.1);
+}
